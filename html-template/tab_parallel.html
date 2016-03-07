@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{.Result.Current.Book}} {{.Result.Current.Chapter}} in Parallel ({{.Translation}}) - Seeketh.org</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/style-3.css" />
+	<!--[if lte IE 8]>
+	    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+	<![endif]-->
+	<!--[if gt IE 8]><!-->
+	    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+	<!--<![endif]-->
+</head>
+<body>
+    <div id="container">
+    	{{template "header" .}}
+    	<div id="body">
+    	    <div class="container margin">
+	            <div class="content">
+					<div class="pure-g pure-u-1 all-caps" id="study-header">
+						<h1>{{.Result.Current.Book}} {{.Result.Current.Chapter}} <span>({{.Translation}})</span></h1>
+					</div>
+					<div class="pure-g pure-u-1">
+						<a id="settings" href="#"><span class="fa fa-cog" style="color:blue;font-size:14px;"></span> Bible Settings</a>
+					</div>
+					<div id="popup" title="Bible Settings">
+						<div class="pure-g pure-u-1 sep-5">
+							<label for="translationList1">Translation 1:</label><br/>
+							<select name="translationList1" id="translationList1">
+								{{range .BibleList1}}
+								{{if .Selected}}
+								<option value="{{.Abbrev}}" selected>{{.Name}}</option>
+								{{else}}
+								<option value="{{.Abbrev}}">{{.Name}}</option>
+								{{end}}
+								{{end}}
+							</select>
+						</div>
+						<div class="pure-g pure-u-1 sep-5">
+							<label for="translationList2">Translation 2:</label><br/>
+							<select name="translationList2" id="translationList2">
+								{{range .BibleList2}}
+								{{if .Selected}}
+								<option value="{{.Abbrev}}" selected>{{.Name}}</option>
+								{{else}}
+								<option value="{{.Abbrev}}">{{.Name}}</option>
+								{{end}}
+								{{end}}
+							</select>
+						</div>
+						<div class="pure-g pure-u-1 sep-5">
+							<input id="submit" type="submit" class="button" value="Update" />
+						</div>
+					</div>
+					<div class="pure-g pure-u-1" id="study-tabs">
+						<ul>
+							<li><a href="/bible/{{.Translation}}/{{.Result.Current.Book}}/{{.Result.Current.Chapter}}">Reading</a></li>
+							<li><a class="select" href="/parallel/{{.Translation}}/{{.Result.Current.Book}}/{{.Result.Current.Chapter}}/?compare={{.Compare}}">Parallel</a></li>
+							{{if .EnableStrongs}}
+							<li><a href="/strongs/{{.Translation}}/{{.Result.Current.Book}}/{{.Result.Current.Chapter}}">Strongs</a></li>
+							{{end}}
+						</ul>
+					</div>
+					<div class="pure-g pure-u-1">
+						<div class="pure-g">
+							<div class="pure-u-1-2 pad-10">
+								<b>{{.TranslationName1}}</b>
+							</div>
+							<div class="pure-u-1-2 pad-10">
+								<b>{{.TranslationName2}}</b>
+							</div>
+						</div>
+					</div>
+					{{range .Verses}}
+					<div class="pure-g">
+						<div class="pure-u-1-2 pad-10">
+							<span class="scripture"><sup class="verse">{{.Verse}}</sup> {{.Text1}}</span>
+						</div>
+						<div class="pure-u-1-2 pad-10">
+							<span class="scripture"><sup class="verse">{{.Verse}}</sup> {{.Text2}}</span>
+						</div>
+					</div>
+					{{end}}
+					<div class="pure-g pure-u-1" id="study-paging">
+						<ul>
+							{{if .Result.Prev.Chapter}}
+							<li><a href="/parallel/{{.Translation}}/{{.Result.Prev.Book}}/{{.Result.Prev.Chapter}}?compare={{.Compare}}">&#9668; {{.Result.Prev.Book}} {{.Result.Prev.Chapter}}</a></li>
+							{{end}}
+							{{if .Result.Next.Chapter}}
+							<li><a href="/parallel/{{.Translation}}/{{.Result.Next.Book}}/{{.Result.Next.Chapter}}?compare={{.Compare}}">{{.Result.Next.Book}} {{.Result.Next.Chapter}} &#9658;</a></li>
+							{{end}}
+						</ul>
+					</div>
+				</div>
+    	    </div>
+    	</div>
+		{{template "footer" .}}
+		<script>
+
+		$(function() {
+
+			localStorage.setItem("translation","{{.Translation}}");
+            localStorage.setItem("compare","{{.Compare}}");
+
+			$("#settings").css('display','block');
+
+			$("#settings").click(function () {
+				$("#popup").dialog({modal:true});
+				return false;
+			});
+
+			$("#submit").click(function () {
+				newTranslation1 = document.getElementById('translationList1').value
+                newTranslation2 = document.getElementById('translationList2').value
+                urlRedirect = document.URL.replace("/"+ localStorage.getItem("translation")+"/", "/"+newTranslation1+"/")
+                urlRedirect = urlRedirect.replace("?compare="+localStorage.getItem("compare"), "?compare="+newTranslation2)
+                localStorage.setItem("translation",newTranslation1);
+                localStorage.setItem("compare",newTranslation2);
+                window.location.href = urlRedirect
+			});
+		})
+		</script>
+    </div>
+</body>
+</html>

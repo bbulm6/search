@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Contact Us - Seeketh.org</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="static/css/style-3.css" />
+	<!--[if lte IE 8]>
+	    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+	<![endif]-->
+	<!--[if gt IE 8]><!-->
+	    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+	<!--<![endif]-->
+</head>
+<body>
+    <div id="container">
+    	{{template "header" .}}
+    	<div id="body">
+    	    <div class="container margin">
+				<div class="content">
+					<h1>Contact Us</h1>
+					{{if .FormSubmitted}}
+					<p>Thank you for contacting us. Your email has been sent.</p>
+					{{else}}
+					<form method="post" action="">
+						<div class="pure-g pure-u-1 sep-5">
+							<label for="name">Name:</label><br/>
+							<input type="text" id="name" name="name" value="{{.Post.Name}}" /><br/>
+							<span class="error">{{.Err.Name}}</span>
+						</div>
+						<div class="pure-g pure-u-1 sep-5">
+							<label for="email">Email:</label><br/>
+							<input type="text" id="email" name="email" value="{{.Post.Email}}"/><br/>
+							<span class="error">{{.Err.Email}}</span>
+						</div>
+						<div class="pure-g pure-u-1 sep-5">
+							<label for="message">Message:</label><br/>
+							<textarea cols="30" rows="6" id="message" name="message">{{.Post.Message}}</textarea><br/>
+							<span class="error">{{.Err.Message}}</span>
+						</div>
+						<div class="pure-g pure-u-1 sep-5">
+							<input type="submit" class="button" value="Send Email" />
+						</div>
+					</form>
+					{{end}}
+				</div>
+    	    </div>
+    	</div>
+		{{template "footer" .}}
+    </div>
+</body>
+</html>

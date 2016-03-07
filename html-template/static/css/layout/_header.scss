@@ -1,0 +1,151 @@
+
+div#header {
+	background:$color-dark-green;
+	border-bottom: 1px solid #000;
+    box-shadow: 0px 1px 3px rgba(0, 29, 49, 0.3);
+}
+
+div#header a {
+	color: #eee;
+	text-decoration: none;
+}
+
+form.header-search {
+	width: 256px;
+	position: relative;
+	left: 110px;
+	top: -24px;
+	background-color:#fff;
+}
+
+form.header-search input[type=text] {
+    width: 224px;
+    height: 28px;
+    line-height: 28px;
+    padding-right:30px;
+	border: 0;
+}
+
+form.header-search input[type=submit] {
+	font-family: FontAwesome;
+	font-size: 14px;
+	height: 28px;
+	width: 28px;
+	color: white;
+	background-color: $color-dark-green;
+	border: none;
+	cursor: pointer;
+	float: right;
+	border: 1px solid #fff;
+}
+
+#header-left {
+	float: left;
+	height: 26px;
+}
+
+#header-right {
+	float: right;
+	height: 26px;
+}
+
+ul.nav {
+    text-align: right;
+    display:block;
+    margin:0px;
+    padding: 6px 0px 0px 0px;
+    font-size: 14px;
+}
+
+ul.nav li {
+    display: inline;
+    list-style-type: none;
+    padding-left: 10px;
+}
+
+a#logo {
+    font-size: 18px;
+    font-family: $font-serif;
+	margin-top:5px;
+}
+
+#menu-toggle {
+    display:none;
+}
+
+.menu-icon {
+    font-size: 20px !important;
+    color: white;
+    float: right;
+    margin-top: 3px;
+}
+
+
+@media (max-width: 48em) {
+    form.header-search { width: 250px; }
+
+    form.header-search input[type=text] {
+        width: 218px;
+    }
+}
+
+@media (max-width: 35.5em) {
+
+	a#logo {
+	    font-size: 16px;
+		margin-top:5px;
+	}
+
+    form.header-search {
+		width: 160px;
+		left: 100px;
+		top: -22px
+	}
+
+    form.header-search input[type=text] {
+        width: 128px;
+    }
+
+    #menu-toggle:checked + ul.nav {
+	display:block;
+	}
+
+    ul.header-menu {
+      display: inline;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 16px;
+    }
+
+    ul.header-menu li {
+      display: inline-block;
+      padding-top: 6px;
+    }
+
+    ul.nav {
+        padding: 16px 0 0 0;
+        margin: 0;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        display: none;
+        font-size: 16px;
+        top: 22px;
+        z-index: 2;
+        float: none;
+    }
+
+    ul.nav li {
+      display: block;
+      list-style-type: none;
+      padding: 8px 16px 4px 20px;
+      background-color: $color-dark-green;
+    }
+
+    ul.header-menu li:hover ul {
+      display: block;
+      opacity: 1;
+      visibility: visible;
+    }
+}

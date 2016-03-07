@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{.Result.Current.Book}} {{.Result.Current.Chapter}} with Strongs ({{.Translation}}) - Seeketh.org</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="static/css/style-3.css" />
+	<!--[if lte IE 8]>
+	    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+	<![endif]-->
+	<!--[if gt IE 8]><!-->
+	    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+	<!--<![endif]-->
+</head>
+<body>
+    <div id="container">
+    	{{template "header" .}}
+    	<div id="body">
+    	    <div class="container margin">
+				<div class="content">
+					<div class="pure-g pure-u-1 all-caps" id="study-header">
+						<h1>{{.Result.Current.Book}} {{.Result.Current.Chapter}} <span>({{.Translation}})</span></h1>
+					</div>
+					<div class="pure-g pure-u-1" id="study-tabs">
+						<ul>
+							<li><a href="/bible/{{.Translation}}/{{.Result.Current.Book}}/{{.Result.Current.Chapter}}">Reading</a></li>
+							<li><a href="/parallel/{{.Translation}}/{{.Result.Current.Book}}/{{.Result.Current.Chapter}}/?compare={{.Compare}}">Parallel</a></li>
+							{{if .EnableStrongs}}
+							<li><a class="select" href="/strongs/{{.Translation}}/{{.Result.Current.Book}}/{{.Result.Current.Chapter}}">Strongs</a></li>
+							{{end}}
+						</ul>
+					</div>
+					<div class="pure-g pure-u-1">
+						<div class="pbreak">
+						<div class="drop-caps">{{.Result.Current.Chapter}}</div>
+						{{.Data}}
+						</div>
+					</div>
+					<div class="pure-g pure-u-1" id="study-paging">
+						<ul>
+							{{if .Result.Prev.Chapter}}
+							<li><a href="/strongs/{{.Translation}}/{{.Result.Prev.Book}}/{{.Result.Prev.Chapter}}">&#9668; {{.Result.Prev.Book}} {{.Result.Prev.Chapter}}</a></li>
+							{{end}}
+							{{if .Result.Next.Chapter}}
+							<li><a href="/strongs/{{.Translation}}/{{.Result.Next.Book}}/{{.Result.Next.Chapter}}">{{.Result.Next.Book}} {{.Result.Next.Chapter}} &#9658;</a></li>
+							{{end}}
+						</ul>
+					</div>
+				</div>
+    	    </div>
+    	</div>
+		{{template "footer" .}}
+    </div>
+</body>
+</html>

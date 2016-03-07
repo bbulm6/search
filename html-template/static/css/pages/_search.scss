@@ -1,0 +1,131 @@
+span.result {
+    padding-bottom: 18px;
+    display: block;
+}
+
+span.result a {
+    font-family: $font-sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+div#paging ul {
+    text-align: center;
+}
+
+div#paging li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 16px;
+}
+
+div#paging a {
+    font-size:14px;
+    border-bottom: none;
+    padding:0px 3px;
+    text-decoration:none;
+}
+
+#logo-text {
+    font-family: $font-serif;
+    font-size: 20px;
+    margin: 5px 5px 0px 0px;
+}
+
+#search-bar {
+    padding: 5px 0 46px 0;
+    background-color: #0D6950;
+}
+
+#search-bar input[type=text] {
+    width: 360px;
+    height: 37px;
+    margin:0;
+    border: 0;
+    outline: none;
+}
+
+#search-bar input[type=submit] {
+    font-family: FontAwesome;
+    font-size: 20px;
+    height: 37px;
+    width: 36px;
+    color: white;
+    background-color: #0D6950;
+    border: 2px solid #fff;
+    cursor: pointer;
+    float: right;
+    margin:0;
+}
+
+#search-form {
+    position: absolute;
+    left: 120px;
+    max-width: 400px;
+    width: 420px;
+    background-color: #fff;
+}
+
+div.search-padding {
+    padding-left: 110px;
+    padding-right: 50px;
+}
+
+a.search-logo {
+    font-family: $font-serif;
+    color: #F0F0F0;
+    text-decoration: none;
+    font-size: 18px;
+    position: absolute;
+    margin-top: 8px;
+}
+
+div.sidebar {
+    padding: 5px;
+    border: 1px solid $color-dark-green;
+}
+
+div.sidebar ul {
+    margin: 0;
+    list-style: square outside none;
+    color: rgb(126, 126, 124);
+}
+
+@media (max-width: 48em) {
+
+    div.search-padding {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    div#search-form {
+        position: static;
+    }
+}
+
+@media (max-width: 35.5em) {
+
+    div.search-padding {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    div#search-form {
+        position: static;
+    }
+
+    #search-form {
+        position: absolute;
+        left: 100px;
+        width: 210px;
+    }
+
+    #search-bar input[type=text] {
+        width: 170px;
+    }
+
+    a.search-logo {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{.Result.Word}} {{.Result.Id}} - Seeketh.org</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="static/css/style-3.css" />
+	<!--[if lte IE 8]>
+	    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+	<![endif]-->
+	<!--[if gt IE 8]><!-->
+	    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+	<!--<![endif]-->
+</head>
+<body>
+    <div id="container">
+    	{{template "header" .}}
+    	<div id="body">
+    	    <div class="container margin">
+				<div class="content">
+					<h1> {{.Result.Word}} ({{.Result.Language}})</h1>
+					<div class="pure-g row-dec">
+						<div class="pure-u-md-6-24 pure-u-10-24 pad-10">
+							<b>Code:</b>
+						</div>
+						<div class="pure-u-md-18-24 pure-u-14-24 pad-10">
+							{{.Result.Id}}
+						</div>
+					</div>
+					<div class="pure-g row-dec">
+						<div class="pure-u-md-6-24 pure-u-10-24 pad-10">
+							<b>Original:</b>
+						</div>
+						<div class="pure-u-md-18-24 pure-u-14-24 pad-10">
+							<span class="foreign">{{.Result.Original}}</span>
+						</div>
+					</div>
+					<div class="pure-g row-dec">
+						<div class="pure-u-md-6-24 pure-u-10-24 pad-10">
+							<b>Word:</b>
+						</div>
+						<div class="pure-u-md-18-24 pure-u-14-24 pad-10">
+							{{.Result.Word}}
+						</div>
+					</div>
+					<div class="pure-g row-dec">
+						<div class="pure-u-md-6-24 pure-u-10-24 pad-10">
+							<b>Pronunciation:</b>
+						</div>
+						<div class="pure-u-md-18-24 pure-u-14-24 pad-10">
+							{{.Result.Pronunciation}}
+						</div>
+					</div>
+					<div class="pure-g row-dec">
+						<div class="pure-u-md-6-24 pure-u-10-24 pad-10">
+							<b>Definition:</b>
+						</div>
+						<div class="pure-u-md-18-24 pure-u-14-24 pad-10">
+							{{.Result.Definition}}
+						</div>
+					</div>
+					{{if .Result.See}}
+					<div class="pure-g row-dec">
+						<div class="pure-u-md-6-24 pure-u-10-24 pad-10">
+							<b>Similiar Words:</b>
+						</div>
+						<div class="pure-u-md-18-24 pure-u-14-24 pad-10">
+							{{range .Result.See}}
+								<div class="pure-g pure-u-1">
+									<a href="{{.}}">{{.}}</a>
+								</div>
+							{{end}}
+						</div>
+					</div>
+					{{end}}
+				</div>
+    	    </div>
+    	</div>
+		{{template "footer" .}}
+    </div>
+</body>
+</html>

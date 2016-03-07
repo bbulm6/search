@@ -1,0 +1,61 @@
+{{define "header"}}
+<div id="header">
+    <div class="container">
+        <div class="pure-g pure-u-1 pad-5">
+            <div id="header-left">
+                <a id="logo" href="/">Seeketh.org</a>
+                <form method="get" class="header-search" action="/search/{{.Translation}}/">
+                    <input type="text" placeholder="Search the Bible" name="q" value="{{.Search}}"/>
+                    <input type="hidden" name="p" value="1" />
+                    <input type="submit" value="&#xf002;" />
+                </form>
+            </div>
+            <div id="header-right">
+			    <span class="small-screen-only">
+        	    	<label for="menu-toggle">
+			    		<span class="fa fa-bars menu-icon"></span>
+			    	</label>
+			    </span>
+        	    <input type="checkbox" id="menu-toggle" />
+		        <ul class="nav">
+                	<li><a title="List of books in the bible" href="/bible/{{.Translation}}">Bible Reading</a></li>
+                	<li><a href="/contact">Contact Us</a></li>
+        	    </ul>
+       		</div>
+        </div>
+    </div>
+</div>
+<!--
+<div id="header">
+    <div class="container">
+        <div class="pure-g pad-5">
+            <div class="pure-u-23-24 pure-u-sm-16-24">
+                <div class="pure-g pure-u-1">
+                    <div class="pure-u header-logo">
+                        <a id="logo" href="/">Seeketh.org</a>
+                    </div>
+                    <div class="pure-u header-search">
+                        <form method="get" action="/search/{{.Translation}}/">
+                            <input type="text" placeholder="Search the Bible" name="q" value="{{.Search}}"/>
+                            <input type="hidden" name="p" value="1" />
+                            <input type="submit" value="&#xf002;" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="pure-u-1-24 pure-u-sm-8-24">
+			    <span class="small-screen-only">
+        	    	<label for="menu-toggle">
+			    		<span class="fa fa-bars menu-icon"></span>
+			    	</label>
+			    </span>
+        	    <input type="checkbox" id="menu-toggle" />
+		        <ul class="nav">
+                	<li><a title="List of books in the bible" href="/bible/{{.Translation}}">Bible Reading</a></li>
+                	<li><a href="/contact">Contact Us</a></li>
+        	    </ul>
+       		</div>
+        </div>
+    </div>
+</div>-->
+{{end}}

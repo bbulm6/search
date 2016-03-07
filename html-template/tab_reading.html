@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{.Result.Current.Book}} {{.Result.Current.Chapter}} ({{.Translation}}) - Seeketh.org</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="canonical" href="/bible/{{.Translation}}/{{.Result.Current.Book}}/{{.Result.Current.Chapter}}" />
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/style-3.css" />
+	<!--[if lte IE 8]>
+	    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+	<![endif]-->
+	<!--[if gt IE 8]><!-->
+	    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+	<!--<![endif]-->
+</head>
+<body>
+    <div id="container">
+    	{{template "header" .}}
+    	<div id="body">
+    	    <div class="container margin">
+	            <div class="content">
+					<div class="pure-g pure-u-1 all-caps" id="study-header">
+						<h1>{{.Result.Current.Book}} {{.Result.Current.Chapter}} <span>({{.Translation}})</span></h1>
+					</div>
+					<div class="pure-g pure-u-1">
+						<a id="settings" href="#"><span class="fa fa-cog" style="color:blue;font-size:14px;"></span> Bible Settings</a>
+					</div>
+					<div id="popup" title="Bible Settings">
+						<div class="pure-g pure-u-1 sep-5">
+							<label for="verse-invisible">Hide verse numbers:</label>
+							<input type="checkbox" name="verse-invisible" id="verse-invisible" />
+						</div>
+                        <div class="pure-g pure-u-1 sep-5">
+							<label for="translation">Translation:</label><br/>
+							<select name="translation" id="translationList">
+								{{range .BibleList}}
+								{{if .Selected}}
+								<option value="{{.Abbrev}}" selected>{{.Name}}</option>
+								{{else}}
+								<option value="{{.Abbrev}}">{{.Name}}</option>
+								{{end}}
+								{{end}}
+							</select>
+						</div>
+						<div class="pure-g pure-u-1 sep-5">
+							<input id="submit" type="submit" class="button" value="Update" />
+						</div>
+					</div>
+					<div class="pure-g pure-u-1" id="study-tabs">
+						<ul>
+							<li><a class="select" href="/bible/{{.Translation}}/{{.Result.Current.Book}}/{{.Result.Current.Chapter}}">Reading</a></li>
+							<li><a href="/parallel/{{.Translation}}/{{.Result.Current.Book}}/{{.Result.Current.Chapter}}/?compare={{.Compare}}">Parallel</a></li>
+							{{if .EnableStrongs}}
+							<li><a href="/strongs/{{.Translation}}/{{.Result.Current.Book}}/{{.Result.Current.Chapter}}">Strongs</a></li>
+							{{end}}
+						</ul>
+					</div>
+					<div class="pure-g pure-u-1">
+						<div class="pbreak">
+						<div class="drop-caps">{{.Result.Current.Chapter}}</div>
+						{{.Data}}
+						</div>
+					</div>
+					<div class="pure-g pure-u-1" id="study-paging">
+						<ul>
+							{{if .Result.Prev.Chapter}}
+							<li><a href="/bible/{{.Translation}}/{{.Result.Prev.Book}}/{{.Result.Prev.Chapter}}">&#9668; {{.Result.Prev.Book}} {{.Result.Prev.Chapter}}</a></li>
+							{{end}}
+							{{if .Result.Next.Chapter}}
+							<li><a href="/bible/{{.Translation}}/{{.Result.Next.Book}}/{{.Result.Next.Chapter}}">{{.Result.Next.Book}} {{.Result.Next.Chapter}} &#9658;</a></li>
+							{{end}}
+						</ul>
+					</div>
+				</div>
+    	    </div>
+    	</div>
+		{{template "footer" .}}
+		<script>
+
+		$(function() {
+
+            localStorage.setItem("translation","{{.Translation}}");
+
+            // Check the visibility of the verse number.
+            if (localStorage.getItem("verse-invisible") == null) {
+                localStorage.setItem("verse-invisible","false");
+            }
+            else if (localStorage.getItem("verse-invisible") == "true") {
+                data = document.getElementsByClassName("verse");
+                for (i = 0; i < data.length; i+=1) {
+    			    data[i].style.display = "none";
+    		    }
+            }
+
+            $("#settings").css('display','block');
+
+			$("#settings").click(function () {
+				$("#popup").dialog({modal:true});
+				return false;
+			});
+
+			if (localStorage.getItem("verse-invisible") == "true") {
+				$('#verse-invisible').attr('checked', true);
+			}
+
+    		$("#submit").click(function () {
+
+    			// Check to see whether the user wants the verse number hidden or not
+       			if($("#verse-invisible").is(":checked")) {
+                    localStorage.setItem("verse-invisible","true");
+    			}
+    			else {
+                    localStorage.setItem("verse-invisible","false");
+       			}
+
+    			// Refresh the page
+    			newTranslation = document.getElementById('translationList').value;
+                urlRedirect = $("link[rel='canonical']").attr("href").replace("/"+ localStorage.getItem("translation")+"/", "/"+newTranslation+"/");
+                localStorage.setItem("translation",newTranslation);
+                window.location.href = urlRedirect;
+            });
+		})
+		</script>
+    </div>
+</body>
+</html>

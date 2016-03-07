@@ -1,0 +1,41 @@
+div#study-header span {
+    font-size:24px;
+}
+
+div#study-tabs {
+    padding:0px auto;
+}
+
+div#study-tabs ul {
+    text-align: center;
+}
+
+div#study-tabs li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 18px;
+}
+
+div#study-tabs a {
+    font-size:14px;
+    padding:0px 3px;
+    text-decoration:none;
+}
+
+div#study-paging ul {
+    text-align: center;
+}
+
+div#study-paging li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 16px;
+}
+
+div#study-paging a {
+    font-size:14px;
+    border-bottom: none;
+    padding:0px 3px;
+    text-decoration:none;
+}
+

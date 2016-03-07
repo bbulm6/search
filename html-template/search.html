@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{.Search}} {{if .Page.PrevBool}}(page {{.Page.Current}}){{end}} - Seeketh.org</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="static/css/style-3.css" />
+	<!--[if lte IE 8]>
+	    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+	<![endif]-->
+	<!--[if gt IE 8]><!-->
+	    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+	<!--<![endif]-->
+</head>
+<body>
+    <div id="container">
+		<div id="body">
+			<div class="pure-g pure-u-1" id="search-bar">
+				<div class="wide-screen-page">
+					<a href="/" class="search-logo">Seeketh.org</a>
+					<form method="get" action="" id="search-form">
+	                    <input type="text" placeholder="Search the Bible" name="q" value="{{.Search}}" autofocus/>
+	                    <input type="hidden" name="p" value="1" />
+	                    <input type="submit" value="&#xf002;" />
+	                </form>
+				</div>
+			</div>
+			<div class="wide-screen-page pure-g">
+				<div class="pure-u-sm-12-24 pure-u-md-15-24 pure-u-lg-17-24 pure-u-1 search-padding">
+					<div class="pure-g pure-u-1 sep-10">
+						<b>Found {{.ResultCount}} scripture(s) {{if .Page.PrevBool}}(page {{.Page.Current}}){{end}}</b>
+					</div>
+					<div class="pure-g pure-u-1 sep-10">
+						{{if .Result}}
+						{{range .Result}}
+						<span class="scripture result"><a href="{{.Url}}#{{.Verse}}">{{.Reference}}</a><br/> {{.Text}}</span>
+						{{end}}
+						{{else}}
+						<p>Sorry, we're unable to find scriptures relevant to your query.</p>
+						{{end}}
+					</div>
+					<div class="pure-g pure-u" id="paging">
+						<ul>
+							{{if .Page.PrevBool}}
+								{{if .Range}}
+								<li><a rel="prev" href="/search/{{.Translation}}?q={{.Search}}&p={{.Page.Prev}}&range={{.Range}}">&#9668; Page {{.Page.Prev}}</a></li>
+								{{else}}
+								<li><a rel="prev" href="/search/{{.Translation}}?q={{.Search}}&p={{.Page.Prev}}">&#9668; Page {{.Page.Prev}}</a></li>
+								{{end}}
+							{{end}}
+							{{if .Page.NextBool}}
+								{{if .Range}}
+								<li><a rel="next" href="/search/{{.Translation}}?q={{.Search}}&p={{.Page.Next}}&range={{.Range}}">Page {{.Page.Next}} &#9658;</a></li>
+								{{else}}
+								<li><a rel="next" href="/search/{{.Translation}}?q={{.Search}}&p={{.Page.Next}}">Page {{.Page.Next}} &#9658;</a></li>
+								{{end}}
+							{{end}}
+						</ul>
+					</div>
+				</div>
+				<div class="pure-u-sm-12-24 pure-u-md-9-24 pure-u-lg-7-24 pure-u-1">
+					<div class="pure-g pure-u-1 sep-20 sidebar">
+						<form method="post" action="">
+							<div class="pure-g pure-u-1 sep-5">
+								<select name="translation" id="translationList">
+									{{range .BibleList}}
+									{{if .Selected}}
+									<option value="{{.Abbrev}}" selected>{{.Name}}</option>
+									{{else}}
+									<option value="{{.Abbrev}}">{{.Name}}</option>
+									{{end}}
+									{{end}}
+								</select>
+								<input type="hidden" name="q" value="{{.Search}}" />
+							</div>
+							<div class="pure-g pure-u-1 sep-5">
+								<input type="submit" class="button" id="submit" value="Change Translation" />
+							</div>
+						</form>
+					</div>
+					<div class="pure-g pure-u-1 sep-20 sidebar">
+						<b>Filter Results:</b>
+						<ul>
+						{{range .BookList}}
+						<li><a href="{{.Url}}">{{.Book}} ({{.Count}})</a></li>
+						{{end}}
+						</ul>
+					</div>
+				</div>
+			</div>
+    	</div>
+		{{template "footer" .}}
+    </div>
+</body>
+</html>
